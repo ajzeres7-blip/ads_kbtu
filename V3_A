@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct Node{
+    long long val;
+    Node* next;
+    Node(long long v) : val(v), next(nullptr) {}
+};
+
+int main(){
+    int n;
+    cin>>n;
+    Node* head=nullptr;
+    Node* tail=nullptr;
+    for(int i=0; i<n; i++){
+        long long a; cin>>a;
+        Node* newnode=new Node(a);
+        if(head==nullptr){head=newnode; tail=head;}
+        else{ tail->next=newnode; tail=newnode;}
+    }
+    int p;
+    long long x;
+    cin>>p>>x;
+    Node* fresh=new Node(x);
+    if(p==0){
+        fresh->next=head;
+        head=fresh;
+    } else{
+        Node* temp=head;
+        for(int k=0; k<p-1; k++){
+            temp=temp->next;
+        }
+        fresh->next=temp->next;
+        temp->next=fresh;
+    }
+    Node* w=head;
+    while(w!=nullptr){
+        cout<<w->val;
+        if(w->next!=nullptr){cout<<" ";}
+        w=w->next;
+    }
+    cout<<endl;
+    return 0;
+}
